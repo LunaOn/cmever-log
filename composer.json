@@ -1,23 +1,27 @@
 {
-  "name": "cmever/es_log",
-  "description": "es log composer package",
+  "name": "cmever/log",
+  "description": "cmever log package",
+  "version": "1.0.1",
   "type": "library",
-  "license": "MIT",
+  "license": "proprietary",
   "authors": [
     {
-      "name": "zhangyu-chuanmo",
-      "email": "zhangyu@lunaon.com"
+      "name": "jeffrey-chuanmo",
+      "email": "wangjie@lunaon.com",
+      "role": "Developer"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {
-    "php": ">=5.6",
-    "ext-curl": "*",
+    "php": ">=7.0",
     "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
-      "cmever\\es_log\\": "src/"
+      "cmever\\Log\\": "src/"
     }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.4"
   }
 }
