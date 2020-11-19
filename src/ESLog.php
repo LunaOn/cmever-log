@@ -26,10 +26,10 @@ final class ESLog extends LogAbstract
         'timeout' => 3,
     ];
 
-    public function log(string $event, string $level, string $message, array $extraData): bool
+    public function log(string $level, string $event, string $message, array $extraData): bool
     {
         $config = $this->getConfig();
-        $data = $this->buildLogJson($event, $level, $message, $extraData);
+        $data = $this->buildLogJson($level, $event, $message, $extraData);
         $result = self::postJson($config['log_url'] ?? '', $data, $config['timeout']);
         return $result === 'ok';
     }
@@ -42,7 +42,7 @@ final class ESLog extends LogAbstract
      * @param array $extraData
      * @return array
      */
-    protected function buildLogJson(string $event, string $level, string $message, array $extraData): array
+    protected function buildLogJson(string $level, string $event, string $message, array $extraData): array
     {
         $config = $this->getConfig();
         if (is_null($config['env']) && defined('APP_ENV')) {
