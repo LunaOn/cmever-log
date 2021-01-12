@@ -23,3 +23,20 @@ if ($res) {
 } else {
     echo "Log error!";
 }
+
+$repeatTime = 5;
+$sumTime = 0;
+for ($i = 0; $i < $repeatTime; $i++) {
+    $start = microtime(true);
+    $res = $logger->info('test.info', 'log info demo', [
+        'key' => [
+            'key1' => 'sec',
+            'key2' => $i,
+        ]
+    ]);
+    $end = microtime(true);
+
+    $sumTime += ($end - $start);
+}
+
+echo "\nsum:".$sumTime.',avg:'.($sumTime/$repeatTime)."\n";
