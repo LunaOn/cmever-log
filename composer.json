@@ -1,7 +1,7 @@
 {
   "name": "cmever/log",
   "description": "cmever log package",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "library",
   "license": "proprietary",
   "authors": [
@@ -14,7 +14,8 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-curl": "*"
   },
   "autoload": {
     "psr-4": {

@@ -80,15 +80,17 @@ final class ESLog extends LogAbstract
             return '';
         }
         $timeout = max($timeout, 0.1); // At least 0.1s
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-type:application/json',
-                'content' => json_encode($content),
-                'timeout' => $timeout,
-            ]
-        ];
-        $context = stream_context_create($options);
-        return @file_get_contents($url, false, $context); // disable warning output
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($content));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch,CURLOPT_TIMEOUT,$timeout * 1000);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
     }
 }
